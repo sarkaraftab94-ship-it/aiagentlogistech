@@ -1,0 +1,12 @@
+{
+  "brand_name": "Logistech",
+  "website": "",
+  "colors": {"primary": "#0B2545", "accent": "#13A8C6", "light": "#EAF6FA"},
+  "logo_file": "assets/logo.png",
+  "approved_facts": [],
+  "approved_industries_served": [],
+  "approved_services": ["Refrigerated / cold-chain transportation in Saudi Arabia"],
+  "approved_truck_specs": "",
+  "approved_cities": [],
+  "note": "FILL THIS IN. The agent is forbidden from claiming anything not listed here (fleet size, certifications, clients, coverage, temperature ranges, etc.)."
+}
