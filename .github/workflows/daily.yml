@@ -1,0 +1,56 @@
+name: Logistech daily post
+
+on:
+  schedule:
+    - cron: "0 16 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "1 = generate only, do not publish"
+        default: "0"
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    env:
+      DRY_RUN: ${{ github.event.inputs.dry_run || '0' }}
+      PUBLIC_IMAGE_BASE: https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+      LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+      META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+      INSTAGRAM_BUSINESS_ID: ${{ secrets.INSTAGRAM_BUSINESS_ID }}
+      FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+      X_API_KEY: ${{ secrets.X_API_KEY }}
+      X_API_SECRET: ${{ secrets.X_API_SECRET }}
+      X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+      X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+      PINTEREST_ACCESS_TOKEN: ${{ secrets.PINTEREST_ACCESS_TOKEN }}
+      PINTEREST_BOARD_ID: ${{ secrets.PINTEREST_BOARD_ID }}
+      PINTEREST_LINK: ${{ secrets.PINTEREST_LINK }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt && playwright install --with-deps chromium
+      - name: Generate post and design
+        run: python -m agent.main generate
+      - name: Save design and history
+        run: |
+          git config user.name "logistech-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add output data
+          git commit -m "Daily post $(date -u +%F)" && git push || echo "nothing to commit"
+      - name: Publish
+        run: python -m agent.main publish
+      - name: Save publish status
+        run: |
+          git add data
+          git commit -m "Publish status" && git push || echo "nothing to commit"
