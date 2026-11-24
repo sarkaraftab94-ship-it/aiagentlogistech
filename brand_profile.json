@@ -1,12 +1,34 @@
 {
   "brand_name": "Logistech",
-  "website": "",
+  "website": "https://www.logistech.app",
   "colors": {"primary": "#0B2545", "accent": "#13A8C6", "light": "#EAF6FA"},
   "logo_file": "assets/logo.png",
+  "market": "Saudi Arabia only",
+  "approved_services": [
+    "Refrigerated / cold-chain transportation in Saudi Arabia"
+  ],
   "approved_facts": [],
   "approved_industries_served": [],
-  "approved_services": ["Refrigerated / cold-chain transportation in Saudi Arabia"],
+  "target_industries_for_outreach": [
+    "Food and beverage manufacturers",
+    "Dairy businesses",
+    "Meat and poultry businesses",
+    "Seafood businesses",
+    "Frozen food businesses",
+    "Restaurant chains",
+    "Catering companies",
+    "Central kitchens",
+    "Supermarkets and grocery chains",
+    "Food distributors and wholesalers",
+    "FMCG companies",
+    "Food importers and distributors operating within Saudi Arabia"
+  ],
   "approved_truck_specs": "",
   "approved_cities": [],
-  "note": "FILL THIS IN. The agent is forbidden from claiming anything not listed here (fleet size, certifications, clients, coverage, temperature ranges, etc.)."
+  "approved_contact_cta": "Visit logistech.app",
+  "writing_rules": [
+    "Target industries are audiences to speak to, NOT proof that Logistech already serves them. Write 'if your business handles X' instead of 'we serve X'.",
+    "Never state fleet size, number of trucks, certifications, clients, partners, coverage areas, temperature ranges, delivery times, prices or achievements unless listed in approved_facts.",
+    "Educational cold-chain content is allowed if it is generally true and not presented as a Logistech claim."
+  ]
 }
